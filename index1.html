@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GradeBook</title>
+    <style>
+          @import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
+
+        h1 {
+          font-family: 'Lobster', cursive;
+          font-size: 45px;
+          color: white;
+        }
+        body {
+            background: linear-gradient(to right, darkblue 0%, white 100%);
+            color: white;
+        }
+
+        img {
+            width: 350px;
+            height: auto;
+            border-radius: 5rem;
+        }
+
+        .tableclass {
+            border: solid white 7px;
+        }
+
+        a:link, a:visited{
+            font-weight: bold;
+            color: white;
+            text-decoration: none;
+
+        }
+      
+    </style>
+</head>
+<body>
+
+    <table class="tableclass">
+        <tr>
+            <td>
+    
+    <h1>Gradebook COSC1315</h1>
+    <p>Input grades for each category and calculate overall average
+    </p>
+
+    <table>
+        <tr>
+            <td id="display"></td>
+
+            <td>
+
+    <form name="theform">
+        
+     <table>
+        <tr>
+            <td >Practice Exercise(15%):</td>
+            <td><input name="practiceExeFm" size=10><br></td>
+        </tr>  
+
+        <tr>
+            <td>Homework Exercise (30%):</td>  </td>
+            <td><input name="hmwkExeFm" size=10><br></td>
+        </tr>
+        <tr>
+            <td>Exam 1 - HTML5(10%):</td>
+            <td><input name="examOneFm"  size=10><br></td>
+        </tr> 
+
+        <tr>
+            <td>Exam 2 - CSS(10%):</td>
+            <td><input name="examTwoFm"  size=10><br></td>
+        </tr>
+
+        <tr>
+            <td>Exam 3 - JavaScript: (10%)</td>
+            <td><input name="examThreeFm"  size=10><br></td>
+        </tr>
+
+        <tr>
+            <td>Project(25%):</td>
+            <td><input name="projectFm" size=10><br></td>
+        </tr>
+        <tr>
+            <td>Overall Average(numeric):</td>
+            <td style="background-color: white; color: black" id="avgNumFm" ></td>
+        </tr>
+
+        <tr>
+            <td>Overall Average(letter):</td>
+            <td style="background-color: white; color: black;" id="avgLetterFm" ></td>
+        </tr>
+        <tr>
+            <td colspan="2"> <input type="button" name="calc" value="Calculate" onClick="calculate();">
+             <input type="button" name="clear" value="Clear" onClick="clearinfo();"></td>
+        </tr>
+
+                 </table>
+
+             </form>
+        </td>
+    </tr>
+</table>
+    
+    <script>
+        
+    //declare the calculate funcion
+    function calculate() {
+        //declare the variables and constants
+        const practice = .15;
+        const homework = .30;
+        const exam1 = .10;
+        const exam2 = .10;
+        const exam3 = .10;
+        const projectp = .25;
+
+        var practiceExe; //practice exam percent
+        var hmwkExe; //homework exam 
+        var examOne; //exam 1 percent
+        var examTwo; //exam 2 percent
+        var examThree; //exam 3 percent
+        var project; //project percent
+
+        var avgNum; //  average number
+        var avgLetter; // average letter
+ 
+        //get the values from the text fields
+        practiceExe = parseFloat(document.theform.practiceExeFm.value);
+        hmwkExe = parseFloat(document.theform.hmwkExeFm.value);
+        examOne = parseFloat(document.theform.examOneFm.value);
+        examTwo = parseFloat(document.theform.examTwoFm.value);
+        examThree = parseFloat(document.theform.examThreeFm.value);
+        project = parseFloat(document.theform.projectFm.value);
+
+
+        // Calculate and display daily driving cost
+        avgNum = parseFloat((practiceExe * practice) + (hmwkExe * homework) + (examOne * exam1) + (examTwo * exam2) + (examThree * exam3) + (project * projectp))
+
+            if (avgNum >= 90)
+                avgLetter = "A"
+            else if (avgNum >= 80)
+                avgLetter = "B"
+            else if (avgNum >= 70)
+                avgLetter = "C"
+            else if (avgNum >= 60)
+                avgLetter = "D"
+            else
+                avgLetter = "F"
+
+        document.getElementById("avgNumFm").innerHTML = avgNum.toFixed(2);
+        document.getElementById("avgLetterFm").innerHTML = avgLetter;
+    }
+
+        function clearinfo() {
+            document.theform.practiceExeFm.value = " ";
+            document.theform.hmwkExeFm.value = " ";
+            document.theform.examOneFm.value = " ";
+            document.theform.examTwoFm.value = " ";
+            document.theform.examThreeFm.value = " ";
+            document.theform.projectFm.value = " ";
+           
+
+            document.getElementById("avgNumFm").innerHTML = " ";
+            document.getElementById("avgLetterFm").innerHTML = " ";
+
+            document.theform.practiceExeFm.focus();
+
+        }
+
+        function getImages() {
+
+            document.theform.practiceExeFm.focus();
+
+            
+            //create the images array
+            images = new Array(5);
+            
+            //get the element by ID
+            display = document.getElementById("display");
+
+            //initialize the array with images
+            images[0] = "<img src='grade.png' alt='image of grades 1'>";
+            images[1] = "<img src='grade2.png' alt='image of grades 2'>";
+            images[2] = "<img src='grade3.png' alt='image of grades 3'>";
+            images[3] = "<img src='grade4.png' alt='image of grades 4'>";
+            images[4] = "<img src='grade5.png' alt='image of grades 5'>";
+
+            // get a random index into the arrays
+            i = Math.floor(Math.random() * images.length);
+
+            //display the image to the page
+            display.innerHTML = images[i];
+        }
+    
+          getImages();
+
+       </script>
+    </td>
+  </tr>
+</table>
+
+<p> </p>
+<a href="http://csnet.southtexascollege.edu/localuser/cchurtad/">Go Back to HOMEPAGE</a><br>
+  <strong>Cesna Hurtado</strong>
+
+</body>
+</html>
